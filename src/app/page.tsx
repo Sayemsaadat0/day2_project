@@ -3,7 +3,6 @@ import GetAndDelete from "@/components/GetAndDelete";
 import React, { useState } from "react";
 
 interface Book {
-
   name: string;
   topic: string;
 }
@@ -12,12 +11,11 @@ export default function Home() {
   const [bookname, setbookName] = useState("");
   const [bookTopic, setbookTopic] = useState("");
   const [books, setBooks] = useState<Book[]>([]);
-  const [newID, setNewID] = useState(1)
+  const [newID, setNewID] = useState(1);
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const newBook: Book = {
-    
       name: bookname,
       topic: bookTopic,
     };
@@ -32,29 +30,26 @@ export default function Home() {
     setBooks(updatedBooks);
   };
 
-   
   const handleUpdate = (index: number, updatedBook: Book) => {
     try {
-      console.log('updated button');
-      const updatedBooks = [...books]; 
-  
+      // console.log('updated button');
+      const updatedBooks = [...books];
+
       if (index >= 0 && index < updatedBooks.length) {
-       
-        const specificBook = updatedBooks[index]; 
-  
+        const specificBook = updatedBooks[index];
+
         if (specificBook) {
-          console.log(specificBook);
+          // console.log(specificBook);
         } else {
-          console.log('Error: Book not found');
+          console.log("Error: Book not found");
         }
       } else {
-        console.log('Error: Invalid index');
+        console.log("Error: Invalid index");
       }
     } catch (error) {
       console.log({ error });
     }
   };
-  
 
   return (
     <main>
@@ -93,16 +88,32 @@ export default function Home() {
 
       <div className="text-center">
         <h2>Book List</h2>
-        {books.map((book, index) => (
+        {Array.isArray(books)
+          ? books.map((book, index) => (
+              <div key={index}>
+                <GetAndDelete
+                  book={book}
+                  setBooks={(x: any) => setBooks(x)}
+                  handleDelete={() => handleDelete(index)}
+                  handleUpdate={(updatedBook) =>
+                    handleUpdate(index, updatedBook)
+                  }
+                  books={books}
+                />
+              </div>
+            ))
+          : null}
+        {/*   {books?.map((book, index) => (
           <div key={index}>
             <GetAndDelete
               book={book}
+              setBooks = {(x : any) => setBooks(x)}
               handleDelete={() => handleDelete(index)}
               handleUpdate={(updatedBook ) => handleUpdate(index, updatedBook)}
-              books={books}
-            />
+              books={books} 
+              />
           </div>
-        ))}
+        ))} */}
       </div>
     </main>
   );
