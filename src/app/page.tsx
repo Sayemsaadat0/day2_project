@@ -3,6 +3,7 @@ import GetAndDelete from "@/components/GetAndDelete";
 import React, { useState } from "react";
 
 interface Book {
+  id : number;
   name: string;
   topic: string;
 }
@@ -16,9 +17,12 @@ export default function Home() {
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const newBook: Book = {
+      id : Math.random(),
       name: bookname,
       topic: bookTopic,
     };
+
+    
     setBooks([...books, newBook]);
     setbookName("");
     setbookTopic("");
@@ -88,7 +92,7 @@ export default function Home() {
 
       <div className="text-center">
         <h2>Book List</h2>
-        {Array.isArray(books)
+       {/*  {Array.isArray(books)
           ? books.map((book, index) => (
               <div key={index}>
                 <GetAndDelete
@@ -102,8 +106,8 @@ export default function Home() {
                 />
               </div>
             ))
-          : null}
-        {/*   {books?.map((book, index) => (
+          : null} */}
+        {books?.map((book, index) => (
           <div key={index}>
             <GetAndDelete
               book={book}
@@ -113,7 +117,7 @@ export default function Home() {
               books={books} 
               />
           </div>
-        ))} */}
+        ))} 
       </div>
     </main>
   );

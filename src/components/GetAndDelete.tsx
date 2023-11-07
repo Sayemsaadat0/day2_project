@@ -96,6 +96,7 @@ import { UpdatteFprm } from "@/app/about/page";
 import React, { useState } from "react";
 
 interface Book {
+  id : number;
   name: string;
   topic: string;
 }
@@ -153,7 +154,7 @@ const GetAndDelete: React.FC<GetAndDeleteProps> = ({
         open={isUpdating}>
         <div className="modal-box">
        
-         <UpdatteFprm   setBooks = {(x : any) => setBooks(x)} books={books} instance={{ name: book.name, topic: book.topic }}/>
+         <UpdatteFprm   setBooks = {(x : any) => setBooks(x)} books={books} instance={{ id : book.id,  name: book.name, topic: book.topic }}/>
          
           
         </div>

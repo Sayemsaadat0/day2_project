@@ -3,6 +3,7 @@ import GetAndDelete from "@/components/GetAndDelete";
 import React, { useState } from "react";
 
 interface Book {
+  id: number;
   name: string;
   topic: string;
 }
@@ -22,18 +23,25 @@ export const UpdatteFprm = ({
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    let newBOoks = { name: bookname, topic: bookTopic };
+    let newBOoks = { id: instance.id, name: bookname, topic: bookTopic };
 
     // console.log(newBOoks);
-    console.log(books); 
+    // console.log(books);
     // 🤐 console.log(modify)
 
     // set book as []
     // const emptyBook = [...books];
 
-    const updatedData = { name : newBOoks.name, topic : newBOoks.topic }
+    const updatedData = {
+      id: instance.id,
+      name: newBOoks.name,
+      topic: newBOoks.topic,
+    };
+    const newUpdatedData = books.filter((book: any) => {
+      return book.id !== newBOoks.id;
+    });
 
-    setBooks();
+    setBooks([...newUpdatedData, updatedData]);
 
     // console.log(books);
   };
