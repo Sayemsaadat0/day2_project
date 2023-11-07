@@ -1,6 +1,5 @@
 "use client";
 import GetAndDelete from "@/components/GetAndDelete";
-import Update from "@/components/Update";
 import React, { useState } from "react";
 
 interface Book {
@@ -78,6 +77,8 @@ export default function Home() {
             <GetAndDelete
               book={book}
               handleDelete={() => handleDelete(index)}
+              handleUpdate={(updatedBook) => handleUpdate(index, updatedBook)}
+              books={books}
             />
           </div>
         ))}
