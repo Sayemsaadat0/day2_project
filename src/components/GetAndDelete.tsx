@@ -23,21 +23,25 @@ const GetAndDelete: React.FC<GetAndDeleteProps> = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    console.log(name)
     setUpdatedBook({ ...updatedBook, [name]: value });
-
   };
 
   const handleSave = () => {
-    handleUpdate(updatedBook);
     setIsUpdating(false);
-    console.log(updatedBook)
   };
 
   return (
     <div>
       <p>Book Name: {book.name}</p>
       <p>Book Topic: {book.topic}</p>
-      <button className="btn" onClick={() => setIsUpdating(true)}>
+      <button
+        className="btn"
+        onClick={() => {
+          handleUpdate(updatedBook);
+          setIsUpdating(true);
+        }}
+      >
         Update
       </button>
 
@@ -70,14 +74,13 @@ const GetAndDelete: React.FC<GetAndDeleteProps> = ({
             <button className="btn" onClick={() => setIsUpdating(false)}>
               Cancel
             </button>
+
             <button className="btn" onClick={handleSave}>
               Save
             </button>
           </div>
         </div>
       </dialog>
-
-    
     </div>
   );
 };
